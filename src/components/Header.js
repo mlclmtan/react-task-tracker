@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types' //impt (ImportPropTypes)
 import Button from './Button'
 
-const Header = ({myname, project}) => { //rafce (ReactArrowFunctionComponentExport)
+const Header = ({year, myname, project}) => { //rafce (ReactArrowFunctionComponentExport)
     const onClick = () => {
         console.log('Click');
     }
@@ -9,7 +9,7 @@ const Header = ({myname, project}) => { //rafce (ReactArrowFunctionComponentExpo
     return (
         <header className='header'>
             <h1> {/* inline style {{}}, background-color==backgroundColor*/}
-                {myname} {project}
+                {year} {myname} {project}
             </h1>
             <Button color="green" text="Add" onClick={onClick} />
         </header>
@@ -21,6 +21,7 @@ Header.defaultProps = {
 };
 
 Header.propTypes = { //p lowercase
+    year: PropTypes.number,
     myname: PropTypes.string, //P uppercase
     project: PropTypes.string.isRequired,
 }
