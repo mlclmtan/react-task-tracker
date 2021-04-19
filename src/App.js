@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { FaTrashAlt } from 'react-icons/fa';
 import Header from './components/Header';
 import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
