@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types' //impt (ImportPropTypes)
+import Button from './Button'
 
 const Header = ({myname, project}) => { //rafce (ReactArrowFunctionComponentExport)
     return (
-        <header>
+        <header className='header'>
             <h1> {/* inline style {{}}, background-color==backgroundColor*/}
                 {myname} {project}
             </h1>
+            <Button color="green" text="Add"/>
         </header>
     );
 };
@@ -16,7 +18,7 @@ Header.defaultProps = {
 
 Header.propTypes = { //p lowercase
     myname: PropTypes.string, //P uppercase
-    project: PropTypes.string,
+    project: PropTypes.string.isRequired,
 }
 
 //inline object style {headingStyle}
