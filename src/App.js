@@ -31,7 +31,7 @@ function App() {
   return (
     <div className="Container">
       <Header myname={name} year={thisYear} />
-      <Tasks tasks={tasks} onDelete={deleteTask} />
+      {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask}/>) : ('No Task to show')} {/*jsx logic inside {}, wrap html in ()*/}
     </div>
   );
 }
