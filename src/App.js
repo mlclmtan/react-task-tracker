@@ -47,7 +47,7 @@ function App() {
 
   return (
     <div className="Container">
-      <Header myname={name} year={thisYear} />
+      <Header myname={name} year={thisYear} onAdd={()=> setShowAddTask(!showAddTask)}/>
       { showAddTask && <AddTask onAdd={addTask}/>} {/* if showAddTask true, show form, &&without else */}
       {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />) : ('No Task to show')} {/*jsx logic inside {}, wrap html in ()*/}
     </div>
