@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; //useEffect happends when pageload
 import Header from './components/Header';
 import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
@@ -6,20 +6,18 @@ import AddTask from './components/AddTask';
 function App() {
   const [showAddTask, setShowAddTask] = useState(false);
 
-  const [tasks, setTasks] = useState([ //[item, mutation fun]
-    {
-      id: 1,
-      text: 'Doctors Appointment',
-      day: 'Feb 5th at 2:30pm',
-      reminder: true,
-    },
-    {
-      id: 2,
-      text: 'Meeting at School',
-      day: 'Feb 6th at 1:30pm',
-      reminder: true,
-    },
-  ]);
+  const [tasks, setTasks] = useState([]); //[item, mutation fun]
+
+  useEffect(()=> { //when pageload
+    const fetchTask = async () => {  //async function
+      const res = await fetch('http://localhost:5000/tasks');
+      const data = await res.json();
+
+      console.log(data)
+    }
+
+    fetchTask(); //run function
+  }, []) //[]dependency array ???
 
   //Add Task
   const addTask = (task) => {
