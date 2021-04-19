@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FaTrashAlt } from 'react-icons/fa';
 import Header from './components/Header';
 import Tasks from './components/Tasks';
 
@@ -25,13 +26,20 @@ function App() {
     }));
   };
 
+  //Toggle Reminder
+  const toggleReminder = (id) => {
+    setTasks(tasks.map((task) => {
+      return task.id === id ? { ...task, reminder: !task.reminder } : task;
+    }));
+  };
+
   const name = 'Malcolm';
   const thisYear = new Date().getFullYear();
 
   return (
     <div className="Container">
       <Header myname={name} year={thisYear} />
-      {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask}/>) : ('No Task to show')} {/*jsx logic inside {}, wrap html in ()*/}
+      {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />) : ('No Task to show')} {/*jsx logic inside {}, wrap html in ()*/}
     </div>
   );
 }
