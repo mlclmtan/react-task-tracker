@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Tasks from './components/Tasks';
 
 function App() {
-  const [tasks, setTasks] = useState([
+  const [tasks, setTasks] = useState([ //[item, mutation fun]
     {
       id: 1,
       text: 'Doctors Appointment',
@@ -18,13 +18,20 @@ function App() {
     },
   ]);
 
+  //Delete Task
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => { //every press, one item filtered (array)
+      return task.id !== id;
+    }));
+  };
+
   const name = 'Malcolm';
   const thisYear = new Date().getFullYear();
 
   return (
     <div className="Container">
       <Header myname={name} year={thisYear} />
-      <Tasks tasks={tasks}/>
+      <Tasks tasks={tasks} onDelete={deleteTask} />
     </div>
   );
 }
