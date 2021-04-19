@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'; //useEffect happends when pageload
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
+import Footer from './components/Footer';
+import About from './components/About';
 
 function App() {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -73,18 +76,19 @@ function App() {
     const taskToToggle = await fetchTask(id); //get that one task from API
     const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder }; //change it, with full content for later update
 
-    const res = await fetch(`http://localhost:5000/tasks/${id}`,{
-      method:'PUT', //update it
-      header:{
-        'Content-type': 'application/json'
+    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: 'PUT', //update it
+      header: {
+        'Content-type': 'application/json',
       },
-      body: JSON.stringify(updTask)
-    })
+      body: JSON.stringify(updTask),
+    });
 
     const data = await res.json(); //get it's new updated data
 
     setTasks(
-      tasks.map((task) => { //change state if id (updated task) if match
+      tasks.map((task) => {
+        //change state if id (updated task) if match
         return task.id === id ? { ...task, reminder: !data.reminder } : task;
       })
     );
@@ -94,22 +98,42 @@ function App() {
   const thisYear = new Date().getFullYear();
 
   return (
-    <div className='Container'>
-      <Header
-        myname={name}
-        year={thisYear}
-        showAdd={showAddTask}
-        onAdd={() => setShowAddTask(!showAddTask)}
-      />
-      {showAddTask && <AddTask onAdd={addTask} />}{' '}
-      {/* if showAddTask true, show form, &&without else */}
-      {tasks.length > 0 ? (
-        <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
-      ) : (
-        'No Task to show'
-      )}{' '}
-      {/*jsx logic inside {}, wrap html in ()*/}
-    </div>
+    <Router>
+      {/* if wanna use router */}
+      <div className='Container'>
+        <Header
+          myname={name}
+          showAdd={showAddTask}
+          onAdd={() => setShowAddTask(!showAddTask)}
+        />
+        
+        {/* if path /, will show this template */}
+        {/* exact only match /, but not /about or /xxxx */}
+        {/* render directly inside <> </>, or use component */}
+        <Route
+          path='/'
+          exact
+          render={(props) => ( //use () for code
+            <>
+              {showAddTask && <AddTask onAdd={addTask} />}{' '}
+              {/* if showAddTask true, show form, &&without else */}
+              {tasks.length > 0 ? (
+                <Tasks
+                  tasks={tasks}
+                  onDelete={deleteTask}
+                  onToggle={toggleReminder}
+                />
+              ) : (
+                'No Task to show'
+              )}
+              {/*jsx logic inside {}, wrap html in ()*/}
+            </>
+          )}
+        />
+        <Route path='/about' component={About} />{/* show component only if path is about */}
+        <Footer year={thisYear}/>
+      </div>
+    </Router>
   );
 }
 
