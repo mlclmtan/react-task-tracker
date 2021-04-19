@@ -4,6 +4,8 @@ import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
 
 function App() {
+  const [showAddTask, setShowAddTask] = useState(false);
+
   const [tasks, setTasks] = useState([ //[item, mutation fun]
     {
       id: 1,
@@ -46,7 +48,7 @@ function App() {
   return (
     <div className="Container">
       <Header myname={name} year={thisYear} />
-      <AddTask onAdd={addTask}/>
+      { showAddTask && <AddTask onAdd={addTask}/>} {/* if showAddTask true, show form, &&without else */}
       {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />) : ('No Task to show')} {/*jsx logic inside {}, wrap html in ()*/}
     </div>
   );
