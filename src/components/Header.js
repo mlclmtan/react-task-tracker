@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types' //impt (ImportPropTypes)
 import Button from './Button'
 
-const Header = ({year, myname, project, onAdd}) => { //rafce (ReactArrowFunctionComponentExport)
+const Header = ({year, myname, project, onAdd, showAdd}) => { //rafce (ReactArrowFunctionComponentExport)
     return (
         <header className='header'>
             <h1> {/* inline style {{}}, background-color==backgroundColor*/}
                 {year} {myname} {project}
             </h1>
-            <Button color="green" text="Add" onClick={onAdd} />
+            <Button color={showAdd ? 'red' : 'green'} text={showAdd ? 'Close' : 'Add'} onClick={onAdd} />
         </header>
     );
 };

@@ -24,9 +24,9 @@ function App() {
   //Add Task
   const addTask = (task) => {
     const id = Math.floor(Math.random() * 10000) + 1;
-    const newTask = {id, ...task};
+    const newTask = { id, ...task };
     setTasks([...tasks, newTask]); //return new array of task
-  }
+  };
 
   //Delete Task
   const deleteTask = (id) => {
@@ -47,8 +47,8 @@ function App() {
 
   return (
     <div className="Container">
-      <Header myname={name} year={thisYear} onAdd={()=> setShowAddTask(!showAddTask)}/>
-      { showAddTask && <AddTask onAdd={addTask}/>} {/* if showAddTask true, show form, &&without else */}
+      <Header myname={name} year={thisYear} showAdd={showAddTask} onAdd={() => setShowAddTask(!showAddTask)} />
+      { showAddTask && <AddTask onAdd={addTask} />} {/* if showAddTask true, show form, &&without else */}
       {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />) : ('No Task to show')} {/*jsx logic inside {}, wrap html in ()*/}
     </div>
   );
