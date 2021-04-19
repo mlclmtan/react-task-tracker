@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
 import Header from './components/Header';
 import Tasks from './components/Tasks';
+import AddTask from './components/AddTask';
 
 function App() {
   const [tasks, setTasks] = useState([ //[item, mutation fun]
@@ -39,6 +40,7 @@ function App() {
   return (
     <div className="Container">
       <Header myname={name} year={thisYear} />
+      <AddTask/>
       {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />) : ('No Task to show')} {/*jsx logic inside {}, wrap html in ()*/}
     </div>
   );
