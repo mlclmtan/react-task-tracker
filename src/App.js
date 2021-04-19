@@ -19,6 +19,11 @@ function App() {
     },
   ]);
 
+  //Add Task
+  const addTask = (task) => {
+    console.log(task)
+  }
+
   //Delete Task
   const deleteTask = (id) => {
     setTasks(tasks.filter((task) => { //every press, one item filtered (array)
@@ -39,7 +44,7 @@ function App() {
   return (
     <div className="Container">
       <Header myname={name} year={thisYear} />
-      <AddTask/>
+      <AddTask onAdd={addTask}/>
       {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />) : ('No Task to show')} {/*jsx logic inside {}, wrap html in ()*/}
     </div>
   );
