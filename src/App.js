@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
     //when pageload
     const getTasks = async () => {
-      const tasksFromServer = await fetchTask();
+      const tasksFromServer = await fetchTasks();
       setTasks(tasksFromServer);
     };
 
@@ -19,7 +19,7 @@ function App() {
   }, []); //[]dependency array ???
 
   //Fetch Tasks
-  const fetchTask = async () => {
+  const fetchTasks = async () => {
     //async function
     const res = await fetch('http://localhost:5000/tasks');
     const data = await res.json();
@@ -27,18 +27,39 @@ function App() {
     return data;
   };
 
+  //Fetch Task
+  const fetchTask = async (id) => {
+    //async function
+    const res = await fetch(`http://localhost:5000/tasks/${id}`);
+    const data = await res.json();
+
+    return data;
+  };
+
   //Add Task
-  const addTask = (task) => {
-    const id = Math.floor(Math.random() * 10000) + 1;
-    const newTask = { id, ...task };
-    setTasks([...tasks, newTask]); //return new array of task
+  const addTask = async (task) => {
+    //array return from addtask component as task
+    const res = await fetch(`http://localhost:5000/tasks/`, {
+      //onAdd post data to httpreq
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json', //in json mode
+      },
+      body: JSON.stringify(task), //in json
+    });
+
+    const data = await res.json(); //need await or else frontend wont update data
+    setTasks([...tasks, data]);
+    // const id = Math.floor(Math.random() * 10000) + 1;
+    // const newTask = { id, ...task };
+    // setTasks([...tasks, newTask]); //return new array of task
   };
 
   //Delete Task
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/tasks/${id}`,{
+    await fetch(`http://localhost:5000/tasks/${id}`, {
       method: 'DELETE',
-    })
+    });
     setTasks(
       tasks.filter((task) => {
         //every press, one item filtered (array)
@@ -48,10 +69,23 @@ function App() {
   };
 
   //Toggle Reminder
-  const toggleReminder = (id) => {
+  const toggleReminder = async (id) => {
+    const taskToToggle = await fetchTask(id); //get that one task from API
+    const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder }; //change it, with full content for later update
+
+    const res = await fetch(`http://localhost:5000/tasks/${id}`,{
+      method:'PUT', //update it
+      header:{
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(updTask)
+    })
+
+    const data = await res.json(); //get it's new updated data
+
     setTasks(
-      tasks.map((task) => {
-        return task.id === id ? { ...task, reminder: !task.reminder } : task;
+      tasks.map((task) => { //change state if id (updated task) if match
+        return task.id === id ? { ...task, reminder: !data.reminder } : task;
       })
     );
   };
