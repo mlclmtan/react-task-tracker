@@ -2,12 +2,16 @@ import PropTypes from 'prop-types' //impt (ImportPropTypes)
 import Button from './Button'
 
 const Header = ({myname, project}) => { //rafce (ReactArrowFunctionComponentExport)
+    const onClick = () => {
+        console.log('Click');
+    }
+    
     return (
         <header className='header'>
             <h1> {/* inline style {{}}, background-color==backgroundColor*/}
                 {myname} {project}
             </h1>
-            <Button color="green" text="Add"/>
+            <Button color="green" text="Add" onClick={onClick} />
         </header>
     );
 };
