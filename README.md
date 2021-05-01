@@ -4,8 +4,6 @@
 
 **[Click Me for Demo](https://tasktracker.malcolmtan.tech/)**
 
-<!-- ![screenshot](https://github.com/mlclmtan/malcolmshop/blob/master/uploads/1.png) -->
-
 ## Feature
 
 -  Database built w/json-server
@@ -14,6 +12,7 @@
 -  Icon from react-icons
 -  Custom styling without UI libraries
 
+![screenshot](https://github.com/mlclmtan/react-task-tracker/blob/master/interfaceScreenshot.png)
 
 
 
