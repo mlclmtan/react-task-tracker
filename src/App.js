@@ -24,7 +24,13 @@ function App() {
   //Fetch Tasks
   const fetchTasks = async () => {
     //async function
-    const res = await fetch('http://localhost:5000/tasks');
+    
+    // local json server
+    // const res = await fetch('http://localhost:5000/tasks');
+
+    // myjsonserver after uploading to github
+    const res = await fetch('https://my-json-server.typicode.com/mlclmtan/react-task-tracker/tasks');
+
     const data = await res.json();
 
     return data;
@@ -33,7 +39,7 @@ function App() {
   //Fetch Task
   const fetchTask = async (id) => {
     //async function
-    const res = await fetch(`http://localhost:5000/tasks/${id}`);
+    const res = await fetch(`https://my-json-server.typicode.com/mlclmtan/react-task-tracker/tasks/${id}`);
     const data = await res.json();
 
     return data;
@@ -42,7 +48,7 @@ function App() {
   //Add Task
   const addTask = async (task) => {
     //array return from addtask component as task
-    const res = await fetch(`http://localhost:5000/tasks/`, {
+    const res = await fetch(`https://my-json-server.typicode.com/mlclmtan/react-task-tracker/tasks/`, {
       //onAdd post data to httpreq
       method: 'POST',
       headers: {
@@ -60,7 +66,7 @@ function App() {
 
   //Delete Task
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/tasks/${id}`, {
+    await fetch(`https://my-json-server.typicode.com/mlclmtan/react-task-tracker/tasks/${id}`, {
       method: 'DELETE',
     });
     setTasks(
@@ -76,7 +82,7 @@ function App() {
     const taskToToggle = await fetchTask(id); //get that one task from API
     const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder }; //change it, with full content for later update
 
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+    const res = await fetch(`https://my-json-server.typicode.com/mlclmtan/react-task-tracker/tasks/${id}`, {
       method: 'PUT', //update it
       header: {
         'Content-type': 'application/json',
