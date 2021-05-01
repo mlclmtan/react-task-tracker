@@ -1,3 +1,24 @@
+# React Task Tracker
+
+>  Task tracker app with components, props, state, hooks, working with an API on mock backend
+
+**[Click Me for Demo](https://tasktracker.malcolmtan.tech/)**
+
+<!-- ![screenshot](https://github.com/mlclmtan/malcolmshop/blob/master/uploads/1.png) -->
+
+## Feature
+
+-  Database built w/json-server
+-  DB Works locally with json-server package, serverless-ly on my-json-server for heroku deployment
+-  State used with react-hook
+-  Icon from react-icons
+-  Custom styling without UI libraries
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
